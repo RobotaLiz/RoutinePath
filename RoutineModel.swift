@@ -10,8 +10,8 @@ struct RoutineModel : Identifiable, Codable  {
     var motivation : String
     var days : Int
    
-    init(id: String, habit: String, motivation: String, days: Int) {
-        self.id = id
+    init( habit: String, motivation: String, days: Int) {
+      
         self.habit = habit
         self.motivation = motivation
         self.days = days

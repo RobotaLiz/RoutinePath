@@ -5,7 +5,7 @@ class RoutineViewModel : ObservableObject {
     @Published var isAdding = false
     let db = Firestore.firestore()
     
-    var list = [RoutineModel]()
+   @Published var list = [RoutineModel]()
     
     func add(routine : RoutineModel) {
         do {
@@ -16,9 +16,10 @@ class RoutineViewModel : ObservableObject {
         // lägga till ny habit
         isAdding = false 
     }
-    func listenToFirebase () {
+    
+    func followFirebase () {
         
-        db.collection("routin").addSnapshotListener() {
+        db.collection("routine").addSnapshotListener() {
             snapshot, err in
             
             guard let snapshot = snapshot else {return}

@@ -20,7 +20,7 @@ struct AddNewRoutineView : View {
                 .font(.title)
           Spacer()
             Button("Add Habit  ", action: {
-                routineList.add()
+                routineList.add(routine: RoutineModel(habit: habit, motivation: motivation, days: Int(days) ?? 0))
             })
                 .foregroundColor(.white)
                 .background(.blue)

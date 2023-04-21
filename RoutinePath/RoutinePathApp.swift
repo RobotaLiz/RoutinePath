@@ -1,9 +1,3 @@
-//
-//  RoutinePathApp.swift
-//  RoutinePath
-//
-//  Created by Liza Hjortling on 2023-04-18.
-//
 
 import SwiftUI
 import FirebaseCore
