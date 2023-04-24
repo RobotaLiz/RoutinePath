@@ -4,26 +4,40 @@ import SwiftUI
 
 struct RoutineView : View {
     @Environment(\.presentationMode) var presentationMode
-    @State var list : RoutineModel
-    
+    @State var model : RoutineModel
+    @State var vModel : RoutineViewModel
+    @State var dates : Set<DateComponents> = []
     
     var body: some View {
         NavigationView {
             VStack{
-                Label("Overview", systemImage: "figure.walk")
+                
+                Image(model.image)
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                Text(model.habit)
                     .font(.title2)
-                    .foregroundColor(.cyan)
-                    Spacer()
+                    .foregroundColor(.black)
+                    .padding()
+                MultiDatePicker("Days", selection: $dates, in: Date.now...)
+                    .frame(height: 300)
                 
+                    .padding()
                 
-                  TextField(list.motivation, text: $list.motivation)
+                TextField(model.motivation, text: $model.motivation)
                       Spacer()
+                
             }
             
         }
-        .navigationBarItems(trailing: Button("Delete") {
+        .navigationBarItems(trailing: Button("Edit") {
             presentationMode.wrappedValue.dismiss()
         })
-        
+        Button(action: {
+            vModel.DeleteRoutine(Routine: model)
+        }, label: {
+            Image(systemName: "trash")
+                .foregroundColor(.red)
+        })
     }
 }

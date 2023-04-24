@@ -16,6 +16,16 @@ class RoutineViewModel : ObservableObject {
         // lägga till ny habit
         isAdding = false 
     }
+    func DeleteRoutine (Routine : RoutineModel) {
+        
+        db.collection("routine").document(Routine.id ?? "").delete() { err in
+            if let err = err {
+                print("Error deleting! \(err)")
+            }else{
+                print("The document is removed ")
+            }
+        }
+    }
     
     func followFirebase () {
         

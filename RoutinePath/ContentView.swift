@@ -1,4 +1,3 @@
-
 import SwiftUI
 import FirebaseCore
 import Firebase
@@ -10,22 +9,39 @@ import Firebase
 //[ ] Gör det som finns i våran VStack till en egen view? så blir det tydligare vad if-satsen gör! :)
   
 struct ContentView: View {
+    @State var test = false
+    
     let db = Firestore.firestore()
     @StateObject var routineList = RoutineViewModel()
-   
     var body: some View {
         NavigationView {
             if(routineList.isAdding) {
-               // AddNewRoutineView(routineList: routineList)
-                InfoView(viewModel: routineList)
+                AddNewRoutineView(routineList: routineList)
+                
             }
             else{
                 VStack {
                     List {
-                        ForEach(routineList.list) { list in
-                            NavigationLink(destination: RoutineView(list: list)) {
-                                Text(list.habit)
-                                
+                        ForEach(routineList.list) { model in
+                            
+                                HStack{
+                                    Image(model.image)
+                                        
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                        
+                                    Text(model.habit)
+                                        .foregroundColor(.gray)
+                                        .font(.title3)
+                                    Spacer()
+                                    Button(action: {
+                                        test = !test
+                                        
+                                    }, label: {
+                                        Image( test ? "emty star" : "full star")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                               })
                             }
                             
                         }
@@ -34,15 +50,8 @@ struct ContentView: View {
                     .toolbar{
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button("Add") {routineList.isAdding = true
-                                
-                                
+                                    
                             }
-                            .toolbar {
-                                ToolbarItem(placement: .navigationBarLeading) {
-                                    Button("Info") {routineList.isAdding = true }
-                                }
-                            }
-                       
                         }
                     }
                 }
