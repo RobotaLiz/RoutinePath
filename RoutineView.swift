@@ -12,9 +12,9 @@ struct RoutineView : View {
         NavigationView {
             VStack{
                 
-                Image(model.image)
-                    .resizable()
-                    .frame(width: 50, height: 50)
+              /// Image(model.image)
+                //   .resizable()
+                //.frame(width: 50, height: 50)
                 Text(model.habit)
                     .font(.title2)
                     .foregroundColor(.black)
@@ -30,6 +30,9 @@ struct RoutineView : View {
             }
             
         }
+        .navigationBarItems(leading:  Button("Back") {
+            vModel.currentRoutinId = ""
+        })
         .navigationBarItems(trailing: Button("Edit") {
             presentationMode.wrappedValue.dismiss()
         })

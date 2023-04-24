@@ -3,11 +3,6 @@ import FirebaseCore
 import Firebase
 
 
-//TODO:
-//[x] Anropa add functionen på rätt sätt i AddNewRoutineView
-//[ ] Anropa listenToFirebase från contentView? så att det man lagt till faktiskt syns i listan
-//[ ] Gör det som finns i våran VStack till en egen view? så blir det tydligare vad if-satsen gör! :)
-  
 struct ContentView: View {
     @State var test = false
     
@@ -19,45 +14,62 @@ struct ContentView: View {
                 AddNewRoutineView(routineList: routineList)
                 
             }
+            else if routineList.currentRoutinId != "" {
+                RoutineView(model: routineList.pickUpModel(id: routineList.currentRoutinId), vModel: routineList)
+            }
             else{
                 VStack {
+                    
                     List {
+                        
                         ForEach(routineList.list) { model in
                             
+                            HStack{
+                                
                                 HStack{
                                     Image(model.image)
-                                        
                                         .resizable()
                                         .frame(width: 40, height: 40)
-                        
+                                    
+                                    
                                     Text(model.habit)
-                                        .foregroundColor(.gray)
-                                        .font(.title3)
-                                    Spacer()
-                                    Button(action: {
-                                        test = !test
-                                        
-                                    }, label: {
-                                        Image( test ? "emty star" : "full star")
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                               })
+                                        .foregroundColor(.cyan)
+                                        .font(.callout)
+                                }
+                                .onTapGesture {
+                                    routineList.currentRoutinId = model.id ?? ""
+                                }
+                                Spacer()
+                                
+                                HStack{
+                                    Image( test ? "whiteCirkel" : "fullBlue")
+                                        .resizable()
+                                        .frame(width: 17, height: 17)
+                                }
+                                .onTapGesture {
+                                    test = !test
+                                    
+                                }
                             }
                             
+                            
                         }
-          
+                        
                     }
                     .toolbar{
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button("Add") {routineList.isAdding = true
-                                    
+                                
+                                
                             }
+                            .foregroundColor(.cyan)
+                            
                         }
+                        
                     }
                 }
             }
         }
-        .padding()
         .onAppear(){
             routineList.followFirebase()
             print("hej")

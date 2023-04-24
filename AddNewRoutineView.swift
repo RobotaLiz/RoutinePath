@@ -12,7 +12,11 @@ struct AddNewRoutineView : View {
     var body: some View {
       
         VStack{
-                Image("icon")
+            Image("habitIcon")
+                .resizable()
+                .frame(width: 200, height: 150)
+            
+            Label("Make your own Habit", systemImage: "sparkles")
                 
             Spacer()
             
@@ -30,14 +34,14 @@ struct AddNewRoutineView : View {
                 .font(.title2)
                 
             Spacer()
-            Button("Add Habit  ", action: {
-                routineList.add(routine: RoutineModel(habit: habit, motivation: motivation, days: Int(days) ?? 0, image: image))
+            Button("Finish  ", action: {
+                routineList.add(routine: RoutineModel(habit: habit, motivation: motivation, days: Int(days) ?? 0, image: String ("")))
             })
                 .foregroundColor(.white)
                 .background(.cyan)
-                .cornerRadius(8)
+                .cornerRadius(11)
                 .padding(-2)
-                .font(.title)
+                .font(.title3)
         }
         
         
@@ -46,5 +50,6 @@ struct AddNewRoutineView : View {
             Button("back", action: {routineList.isAdding = false})
         }
         .padding(40)
+        .foregroundColor(.cyan)
     }
 }

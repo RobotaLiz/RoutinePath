@@ -4,6 +4,7 @@ import Firebase
 class RoutineViewModel : ObservableObject {
     @Published var isAdding = false
     let db = Firestore.firestore()
+   @Published var currentRoutinId = ""
     
    @Published var list = [RoutineModel]()
     
@@ -13,18 +14,22 @@ class RoutineViewModel : ObservableObject {
         }catch{
             print("Error")
         }
-        // lägga till ny habit
-        isAdding = false 
+       
+        isAdding = false
+    }
+    func pickUpModel(id : String) -> RoutineModel{
+        return list.first(where: { $0.id == id}) ?? RoutineModel(habit: "", motivation: "", days: 0, image: "")
     }
     func DeleteRoutine (Routine : RoutineModel) {
-        
         db.collection("routine").document(Routine.id ?? "").delete() { err in
             if let err = err {
                 print("Error deleting! \(err)")
             }else{
                 print("The document is removed ")
             }
+            
         }
+        
     }
     
     func followFirebase () {
@@ -35,7 +40,7 @@ class RoutineViewModel : ObservableObject {
             guard let snapshot = snapshot else {return}
             
             if let err = err {
-                print("error get documen \(err)")
+                print("error get document \(err)")
             }else{
                 self.list.removeAll()
                 for document in snapshot.documents {
