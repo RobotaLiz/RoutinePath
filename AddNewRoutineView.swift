@@ -5,16 +5,21 @@ import SwiftUI
 struct AddNewRoutineView : View {
     @StateObject var routineList : RoutineViewModel
     @State var habit = ""
-    @State var days = ""
     @State var motivation = ""
     @State var image = ""
     
     var body: some View {
       
         VStack{
+           
             Image("habitIcon")
                 .resizable()
-                .frame(width: 200, height: 150)
+                .frame(width: 150, height: 150)
+                .clipShape(Circle())
+                .overlay {
+                    Circle().stroke(.white, lineWidth: 4)
+                }
+                .shadow(radius: 7)
             
             Label("Make your own Habit", systemImage: "sparkles")
                 
@@ -25,17 +30,14 @@ struct AddNewRoutineView : View {
                 
             TextField("Habit : ", text: $habit)
                 .font(.title2)
-                
-            TextField("Days : ", text: $days)
-                .font(.title2)
-                
+        
                 .keyboardType(.numberPad)
             TextField("Motivation : ", text: $motivation)
                 .font(.title2)
                 
             Spacer()
             Button("Finish  ", action: {
-                routineList.add(routine: RoutineModel(habit: habit, motivation: motivation, days: Int(days) ?? 0, image: String ("")))
+                routineList.add(routine: RoutineModel(habit: habit, motivation: motivation, image: String (""), date: Date()))
             })
                 .foregroundColor(.white)
                 .background(.cyan)

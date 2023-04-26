@@ -22,6 +22,7 @@
 		B384A20429EEA16A007E8A1B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B384A20329EEA16A007E8A1B /* FirebaseFirestore */; };
 		B384A20629EEA16A007E8A1B /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B384A20529EEA16A007E8A1B /* FirebaseFirestoreSwift */; };
 		B384A20829EEA39F007E8A1B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B384A20729EEA39F007E8A1B /* GoogleService-Info.plist */; };
+		B3C2AD1729F7B6ED00477AA5 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C2AD1629F7B6ED00477AA5 /* ListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		B384A1F129EE9DBF007E8A1B /* RoutinePathUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinePathUITests.swift; sourceTree = "<group>"; };
 		B384A1F329EE9DBF007E8A1B /* RoutinePathUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinePathUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B384A20729EEA39F007E8A1B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B3C2AD1629F7B6ED00477AA5 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				B384A20729EEA39F007E8A1B /* GoogleService-Info.plist */,
 				B384A1D629EE9DBE007E8A1B /* RoutinePathApp.swift */,
 				B384A1D829EE9DBE007E8A1B /* ContentView.swift */,
+				B3C2AD1629F7B6ED00477AA5 /* ListView.swift */,
 				B384A1DA29EE9DBF007E8A1B /* Assets.xcassets */,
 				B384A1DC29EE9DBF007E8A1B /* Preview Content */,
 			);
@@ -290,6 +293,7 @@
 				B32790D729EFDC0D00E623D2 /* RoutineModel.swift in Sources */,
 				B384A1D929EE9DBE007E8A1B /* ContentView.swift in Sources */,
 				B32790DB29EFE32A00E623D2 /* RoutineView.swift in Sources */,
+				B3C2AD1729F7B6ED00477AA5 /* ListView.swift in Sources */,
 				B384A1D729EE9DBE007E8A1B /* RoutinePathApp.swift in Sources */,
 				B32790DD29F1488000E623D2 /* AddNewRoutineView.swift in Sources */,
 				B32790D929EFDF0A00E623D2 /* RoutineViewModel.swift in Sources */,

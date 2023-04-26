@@ -3,10 +3,11 @@ import Firebase
 
 class RoutineViewModel : ObservableObject {
     @Published var isAdding = false
+    @Published var currentRoutinId = ""
+    @Published var list = [RoutineModel]()
+    @Published var test = false 
+   
     let db = Firestore.firestore()
-   @Published var currentRoutinId = ""
-    
-   @Published var list = [RoutineModel]()
     
     func add(routine : RoutineModel) {
         do {
@@ -18,7 +19,7 @@ class RoutineViewModel : ObservableObject {
         isAdding = false
     }
     func pickUpModel(id : String) -> RoutineModel{
-        return list.first(where: { $0.id == id}) ?? RoutineModel(habit: "", motivation: "", days: 0, image: "")
+        return list.first(where: { $0.id == id}) ?? RoutineModel(habit: "", motivation: "",image: "", date: Date())
     }
     func DeleteRoutine (Routine : RoutineModel) {
         db.collection("routine").document(Routine.id ?? "").delete() { err in
@@ -53,5 +54,11 @@ class RoutineViewModel : ObservableObject {
                 }
             }
         }
+    }
+    func doneNotDone(model:RoutineModel) -> Bool {
+        return test 
+    }
+    func markDay (model:RoutineModel) {
+        test = !test
     }
 }
