@@ -23,10 +23,20 @@ struct RoutineView : View {
                     .frame(height: 300)
                 
                     .padding()
-                
-                TextField(model.motivation, text: $model.motivation)
-                      Spacer()
-                
+                Spacer()
+                HStack{
+                    
+                    Image("images")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                    Text("Streaks:\(calculateStreaks(dateComponents: dates)) ")
+                        .font(.title2)
+                        
+                 
+                }
+                .padding(.trailing, 250)
+                Spacer()
+                    
             }
             
         }
@@ -39,5 +49,45 @@ struct RoutineView : View {
             Image(systemName: "trash")
                 .foregroundColor(.red)
         })
+       .onAppear{
+           GetMarkedDays()
+       }
+    }
+    func calculateStreaks(dateComponents: Set<DateComponents>) -> Int {
+        let sortedDates = dateComponents.compactMap { Calendar.current.date(from: $0) }.sorted()
+        
+        var currentStreak = 1
+        var previousDate: Date?
+        if(dateComponents.count == 0){
+            return 0
+        }
+        if(dateComponents.count == 1){
+            return 1
+        }
+        
+        for date in sortedDates {
+            if let previousDate = previousDate {
+                let calendar = Calendar.current
+                let components = calendar.dateComponents([.day], from: previousDate, to: date)
+                
+                if components.day == 1 {
+                    currentStreak += 1
+                } else {
+                   currentStreak = 1
+                }
+            
+            }
+            
+            previousDate = date
+        }
+        
+        return currentStreak
+    }
+    func GetMarkedDays(){
+        
+        for date in model.markedDays {
+            let comp = Calendar.current.dateComponents([.year, .month, .day], from: date)
+            dates.insert(comp)
+        }
     }
 }

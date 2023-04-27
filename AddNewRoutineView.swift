@@ -27,25 +27,22 @@ struct AddNewRoutineView : View {
             
             TextField("image:", text: $image)
                 .font(.title2)
-                
+               
             TextField("Habit : ", text: $habit)
                 .font(.title2)
         
-                .keyboardType(.numberPad)
-            TextField("Motivation : ", text: $motivation)
-                .font(.title2)
-                
             Spacer()
             Button("Finish  ", action: {
-                routineList.add(routine: RoutineModel(habit: habit, motivation: motivation, image: String (""), date: Date()))
+                routineList.add(routine: RoutineModel(habit: habit,image: image, markedDays: []))
             })
                 .foregroundColor(.white)
                 .background(.cyan)
                 .cornerRadius(11)
                 .padding(-2)
                 .font(.title3)
+            
         }
-        
+        .textInputAutocapitalization(.never)
         
         .toolbar(){
             

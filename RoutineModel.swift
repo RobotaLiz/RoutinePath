@@ -5,17 +5,13 @@ struct RoutineModel : Identifiable, Codable  {
     @DocumentID var id : String?
     
     
-    var date: Date
+    var markedDays: [Date]
     var habit : String
-    var motivation : String
-  
     var image : String
    
-    init( habit: String, motivation: String, image: String, date: Date) {
-      
+    init( habit: String,image: String, markedDays: [Date]) {
         self.habit = habit
-        self.motivation = motivation
-        self.date = date
+        self.markedDays = markedDays
         self.image = image
     }
     

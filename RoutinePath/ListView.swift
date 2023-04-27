@@ -27,7 +27,7 @@ struct ListView: View {
                         Spacer()
                         
                         HStack{
-                            Image( routineList.doneNotDone(model: model) ? "whiteCirkel" : "fullBlue")
+                            Image( routineList.doneNotDone(model: model) ? "fullBlue" : "whiteCirkel")
                                 .resizable()
                                 .frame(width: 17, height: 17)
                         }

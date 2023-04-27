@@ -3,14 +3,20 @@ import FirebaseCore
 import Firebase
 
 
+
 struct ContentView: View {
     @State var test = false
     @StateObject var routineList = RoutineViewModel()
     let db = Firestore.firestore()
+   
     
     var body: some View {
-    NavigationView {
-        if(routineList.isAdding) {
+        
+        Button("Create Reminder") {
+            routineList.HabitReminder()
+        }
+        NavigationView {
+            if(routineList.isAdding) {
                 AddNewRoutineView(routineList: routineList)
                 
             }
@@ -22,17 +28,16 @@ struct ContentView: View {
         }
         .onAppear(){
             routineList.followFirebase()
-           
+            
         }
     }
     
 }
-
-
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+
+
+
