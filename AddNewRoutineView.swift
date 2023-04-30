@@ -3,7 +3,7 @@ import SwiftUI
 
 
 struct AddNewRoutineView : View {
-    @StateObject var routineList : RoutineViewModel
+    @StateObject var vModel : RoutineViewModel
     @State var habit = ""
     @State var motivation = ""
     @State var image = ""
@@ -33,10 +33,10 @@ struct AddNewRoutineView : View {
         
             Spacer()
             Button("Finish  ", action: {
-                routineList.add(routine: RoutineModel(habit: habit,image: image, markedDays: []))
+                vModel.add(routine: RoutineModel(habit: habit,image: image, markedDays: []))
             })
                 .foregroundColor(.white)
-                .background(.cyan)
+                .background(.blue)
                 .cornerRadius(11)
                 .padding(-2)
                 .font(.title3)
@@ -46,9 +46,10 @@ struct AddNewRoutineView : View {
         
         .toolbar(){
             
-            Button("back", action: {routineList.isAdding = false})
+            Button("back", action: {vModel.isAdding = false})
+                .font(.headline)
+               
         }
-        .padding(40)
-        .foregroundColor(.cyan)
+        .padding(20)
     }
 }

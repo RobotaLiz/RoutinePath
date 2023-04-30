@@ -6,29 +6,31 @@ import Firebase
 
 struct ContentView: View {
     @State var test = false
-    @StateObject var routineList = RoutineViewModel()
+    @StateObject var vModel = RoutineViewModel()
     let db = Firestore.firestore()
-   
     
     var body: some View {
         
-        Button("Create Reminder") {
-            routineList.HabitReminder()
-        }
+        
         NavigationView {
-            if(routineList.isAdding) {
-                AddNewRoutineView(routineList: routineList)
+            ZStack{
+                if(vModel.isAdding) {
+                    AddNewRoutineView(vModel: vModel)
+                        .background(Color(.red))
+                }
+                else if vModel.currentRoutinId != "" {
+                    RoutineView(model: vModel.pickUpModel(id: vModel.currentRoutinId), vModel: vModel)
+                        .background(Color.cyan)
+                }else{
+                    ListView(vmodel: vModel)
+                        .background(Color.pink)
+                }
                 
             }
-            else if routineList.currentRoutinId != "" {
-                RoutineView(model: routineList.pickUpModel(id: routineList.currentRoutinId), vModel: routineList)
-            }else{
-                ListView(routineList: routineList)
-            }
+            
         }
         .onAppear(){
-            routineList.followFirebase()
-            
+            vModel.followFirebase()
         }
     }
     

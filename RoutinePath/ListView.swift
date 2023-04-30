@@ -3,13 +3,12 @@
 import SwiftUI
 
 struct ListView: View {
-    @StateObject var routineList : RoutineViewModel
-    
+    @StateObject var vmodel : RoutineViewModel
     
     var body: some View {
         VStack {
             List {
-                ForEach(routineList.list) { model in
+                ForEach(vmodel.list) { model in
                     HStack{
                      
                         
@@ -18,32 +17,35 @@ struct ListView: View {
                                 .resizable()
                                 .frame(width: 40, height: 40)
                             Text(model.habit)
-                                .foregroundColor(.cyan)
+                                .foregroundColor(.blue)
                                 .font(.callout)
                         }
                         .onTapGesture {
-                            routineList.currentRoutinId = model.id ?? ""
+                            vmodel.currentRoutinId = model.id ?? ""
                         }
                         Spacer()
                         
                         HStack{
-                            Image( routineList.doneNotDone(model: model) ? "fullBlue" : "whiteCirkel")
+                            Image( vmodel.doneNotDone(model: model) ? "fullBlue" : "whiteCirkel")
                                 .resizable()
                                 .frame(width: 17, height: 17)
                         }
                         .onTapGesture {
-                            routineList.markDay(model: model)
+                            vmodel.markDay(model: model)
                         }
                     }
                 }
+                .listRowBackground(Color.orange)
             }
+            .scrollContentBackground(.hidden)
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Add") {routineList.isAdding = true
+                    Button("Add") {vmodel.isAdding = true
                         
                         
                     }
-                    .foregroundColor(.cyan)
+                    .foregroundColor(.blue)
+                    .font(.headline)
                     
                 }
             }
