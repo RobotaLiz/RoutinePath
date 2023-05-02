@@ -12,7 +12,7 @@ struct RoutineView : View {
         
         //NavigationView {
         VStack{
-            Image(model.image)
+            Image(systemName: "figure.run")
                 .resizable()
                 .frame(width: 50, height: 50)
             Text(model.habit)
@@ -26,7 +26,7 @@ struct RoutineView : View {
             Spacer()
             HStack{
                 
-                Image("images")
+                Image(systemName: "calendar.circle")
                     .resizable()
                     .frame(width: 30, height: 30)
                 Text("Streaks:\(calculateStreaks(dateComponents: dates)) ")
@@ -38,7 +38,7 @@ struct RoutineView : View {
             Spacer()
             
             Button("Notification") {
-                vModel.HabitReminder()
+                vModel.HabitReminder(routineModel: model)
                 
             }
             .font(.headline)
@@ -49,8 +49,9 @@ struct RoutineView : View {
         
         //}
         .navigationBarItems(leading:  Button("Back") {
-            vModel.currentRoutinId = ""
             
+            vModel.currentRoutinId = ""
+                
             
             
         }).navigationBarItems(trailing: Image(systemName: "trash").onTapGesture {
@@ -58,7 +59,7 @@ struct RoutineView : View {
             vModel.currentRoutinId = ""
         })
         
-        
+        .foregroundColor(.black)
         .onAppear{
             GetMarkedDays()
         }

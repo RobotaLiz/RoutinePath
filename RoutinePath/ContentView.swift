@@ -16,14 +16,14 @@ struct ContentView: View {
             ZStack{
                 if(vModel.isAdding) {
                     AddNewRoutineView(vModel: vModel)
-                        .background(Color(.red))
+                        .background(Color(.orange))
                 }
                 else if vModel.currentRoutinId != "" {
                     RoutineView(model: vModel.pickUpModel(id: vModel.currentRoutinId), vModel: vModel)
-                        .background(Color.cyan)
+                        .background(Color.orange)
                 }else{
                     ListView(vmodel: vModel)
-                        .background(Color.pink)
+                        .background(Color.orange)
                 }
                 
             }

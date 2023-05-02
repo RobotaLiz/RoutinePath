@@ -12,14 +12,10 @@ struct AddNewRoutineView : View {
       
         VStack{
            
-            Image("habitIcon")
+            Image("calender")
                 .resizable()
                 .frame(width: 150, height: 150)
-                .clipShape(Circle())
-                .overlay {
-                    Circle().stroke(.white, lineWidth: 4)
-                }
-                .shadow(radius: 7)
+               
             
             Label("Make your own Habit", systemImage: "sparkles")
                 
@@ -35,8 +31,8 @@ struct AddNewRoutineView : View {
             Button("Finish  ", action: {
                 vModel.add(routine: RoutineModel(habit: habit,image: image, markedDays: []))
             })
-                .foregroundColor(.white)
-                .background(.blue)
+                .foregroundColor(.black)
+                .background(.yellow)
                 .cornerRadius(11)
                 .padding(-2)
                 .font(.title3)
@@ -48,6 +44,7 @@ struct AddNewRoutineView : View {
             
             Button("back", action: {vModel.isAdding = false})
                 .font(.headline)
+                .foregroundColor(.black)
                
         }
         .padding(20)

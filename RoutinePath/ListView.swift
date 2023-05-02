@@ -13,11 +13,11 @@ struct ListView: View {
                      
                         
                         HStack{
-                            Image(model.image)
+                            Image(systemName: "figure.run")
                                 .resizable()
-                                .frame(width: 40, height: 40)
+                                .frame(width: 20, height: 20)
                             Text(model.habit)
-                                .foregroundColor(.blue)
+                                .foregroundColor(.black)
                                 .font(.callout)
                         }
                         .onTapGesture {
@@ -26,7 +26,7 @@ struct ListView: View {
                         Spacer()
                         
                         HStack{
-                            Image( vmodel.doneNotDone(model: model) ? "fullBlue" : "whiteCirkel")
+                            Image(systemName: vmodel.doneNotDone(model: model) ? "checkmark.square.fill" : "square")
                                 .resizable()
                                 .frame(width: 17, height: 17)
                         }
@@ -44,7 +44,7 @@ struct ListView: View {
                         
                         
                     }
-                    .foregroundColor(.blue)
+                    .foregroundColor(.black)
                     .font(.headline)
                     
                 }

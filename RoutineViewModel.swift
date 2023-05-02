@@ -91,22 +91,22 @@ class RoutineViewModel : ObservableObject {
             }
         }
     }
-    func HabitReminder() {
+    func HabitReminder(routineModel: RoutineModel) {
         
         self.eventStore.requestAccess(to: .reminder) { granted, error in
                 if granted && error == nil {
                     let reminder = EKReminder(eventStore: self.eventStore)
-                    reminder.title = "Habit"
+                    reminder.title = routineModel.habit
                     reminder.calendar = self.eventStore.defaultCalendarForNewReminders()
                     
-                    let dueDateComponents = NSDateComponents()
-                    dueDateComponents.year = 2023
-                    dueDateComponents.month = 5
-                    dueDateComponents.day = 1
-                    dueDateComponents.hour = 8
-                    dueDateComponents.minute = 0
-                    reminder.dueDateComponents = dueDateComponents as DateComponents
-                
+                    var dayComponent = DateComponents()
+                    
+                    
+                    
+                    let nextDate = Calendar.current.date(byAdding: dayComponent, to: Date())
+                    let nextDayComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: nextDate ?? Date())
+                    reminder.dueDateComponents = nextDayComponent
+                    
                     do {
                         try self.eventStore.save(reminder, commit: true)
                     } catch {
