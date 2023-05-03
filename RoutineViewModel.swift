@@ -6,7 +6,7 @@ class RoutineViewModel : ObservableObject {
     @Published var isAdding = false
     @Published var currentRoutinId = ""
     @Published var list = [RoutineModel]()
-    @Published var test = false 
+    @Published var test = false
     let eventStore = EKEventStore()
     let db = Firestore.firestore()
     
@@ -16,7 +16,7 @@ class RoutineViewModel : ObservableObject {
         }catch{
             print("Error")
         }
-       
+        
         isAdding = false
     }
     func pickUpModel(id : String) -> RoutineModel{
@@ -66,7 +66,7 @@ class RoutineViewModel : ObservableObject {
         if(diff.day == 0){
             return true
         }
-            
+        
         return false
     }
     func markDay (model: RoutineModel) {
@@ -94,28 +94,29 @@ class RoutineViewModel : ObservableObject {
     func HabitReminder(routineModel: RoutineModel) {
         
         self.eventStore.requestAccess(to: .reminder) { granted, error in
-                if granted && error == nil {
-                    let reminder = EKReminder(eventStore: self.eventStore)
-                    reminder.title = routineModel.habit
-                    reminder.calendar = self.eventStore.defaultCalendarForNewReminders()
-                    
-                    var dayComponent = DateComponents()
-                    
-                    
-                    
-                    let nextDate = Calendar.current.date(byAdding: dayComponent, to: Date())
-                    let nextDayComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: nextDate ?? Date())
-                    reminder.dueDateComponents = nextDayComponent
-                    
-                    do {
-                        try self.eventStore.save(reminder, commit: true)
-                    } catch {
-                        print("Error creating and saving new reminder : \(error.localizedDescription)")
-                    }
-                } else {
-                    print("Error accessing reminders: \(error?.localizedDescription ?? "")")
+            if granted && error == nil {
+                let reminder = EKReminder(eventStore: self.eventStore)
+                reminder.title = routineModel.habit
+                reminder.calendar = self.eventStore.defaultCalendarForNewReminders()
                 
+                let today = Date()
+                var tomorrow = today.addingTimeInterval(86400)
+                
+                var comp = Calendar.current.dateComponents([.year, .month, .day], from: tomorrow)
+                comp.hour = 11
+                
+                
+                reminder.dueDateComponents = comp
+                
+                do {
+                    try self.eventStore.save(reminder, commit: true)
+                } catch {
+                    print("Error creating and saving new reminder : \(error.localizedDescription)")
                 }
+            } else {
+                print("Error accessing reminders: \(error?.localizedDescription ?? "")")
+                
             }
+        }
     }
 }

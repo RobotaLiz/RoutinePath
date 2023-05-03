@@ -7,47 +7,87 @@ struct RoutineView : View {
     @State var model : RoutineModel
     @State var vModel : RoutineViewModel
     @State var dates : Set<DateComponents> = []
-    
+    @State var showingPopup = false
+   
     var body: some View {
-        
-        //NavigationView {
-        VStack{
-            Image(systemName: "figure.run")
-                .resizable()
-                .frame(width: 50, height: 50)
-            Text(model.habit)
-                .font(.title2)
-                .foregroundColor(.black)
-                .padding()
-            MultiDatePicker("Days", selection: $dates, in: Date.now...)
-                .frame(height: 300)
+        ZStack{
             
-                .padding()
-            Spacer()
-            HStack{
-                
-                Image(systemName: "calendar.circle")
+            VStack{
+                Image(systemName: "figure.run")
                     .resizable()
-                    .frame(width: 30, height: 30)
-                Text("Streaks:\(calculateStreaks(dateComponents: dates)) ")
+                    .frame(width: 50, height: 50)
+                Text(model.habit)
                     .font(.title2)
+                    .foregroundColor(.black)
+                    .padding()
+                MultiDatePicker("Days", selection: $dates, in: Date.now...)
+                    .frame(height: 300)
+                
+                    .padding()
+                Spacer()
+                HStack{
+                    
+                    Image(systemName: "calendar.circle")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                    Text("Streaks:\(calculateStreaks(dateComponents: dates)) ")
+                        .font(.title2)
+                    
+                    
+                }
+                .padding(.trailing, 250)
+                Spacer()
+                
+                Button("Notification") {
+                    showingPopup = true
+                    
+                    
+                }
+                .font(.headline)
+                .padding()
                 
                 
             }
-            .padding(.trailing, 250)
-            Spacer()
-            
-            Button("Notification") {
-                vModel.HabitReminder(routineModel: model)
-                
-            }
-            .font(.headline)
-            .padding()
-            
             
         }
-        
-        //}
+        .popup(isPresented: $showingPopup) {
+                  ZStack { // 4
+                      Color.yellow.frame(width: 400, height: 200)
+                     
+                      VStack{
+                          Text("Would you like to add a notification for tomorrow? ")
+                              .font(.title2)
+                              .padding()
+                          HStack{
+                              Button(action: {
+                                  vModel.HabitReminder(routineModel: model)
+                                  showingPopup = false
+                              }, label: {
+                                  Text("Yes  ")
+                                  
+                                      .foregroundColor(.black)
+                                      .background(.orange)
+                                      .cornerRadius(11)
+                                      .font(.title2)
+                                  
+                              })
+                              Button(action: {
+                                  showingPopup = false
+                              }, label: {
+                                  Text(" No  ")
+                                  
+                                      .foregroundColor(.black)
+                                      .background(.orange)
+                                      .cornerRadius(11)
+                                 
+                                      .font(.title2)
+                              })
+                              
+                          }
+                        
+                      }
+                  }
+              }
         .navigationBarItems(leading:  Button("Back") {
             
             vModel.currentRoutinId = ""

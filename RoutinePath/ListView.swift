@@ -13,7 +13,7 @@ struct ListView: View {
                      
                         
                         HStack{
-                            Image(systemName: "figure.run")
+                            Image(systemName: model.image) 
                                 .resizable()
                                 .frame(width: 20, height: 20)
                             Text(model.habit)
@@ -29,13 +29,14 @@ struct ListView: View {
                             Image(systemName: vmodel.doneNotDone(model: model) ? "checkmark.square.fill" : "square")
                                 .resizable()
                                 .frame(width: 17, height: 17)
+                                .foregroundColor(.orange)
                         }
                         .onTapGesture {
                             vmodel.markDay(model: model)
                         }
                     }
                 }
-                .listRowBackground(Color.orange)
+                .listRowBackground(Color.yellow)
             }
             .scrollContentBackground(.hidden)
             .toolbar{
