@@ -13,7 +13,7 @@ struct RoutineView : View {
         ZStack{
             
             VStack{
-                Image(systemName: "figure.run")
+                Image(systemName: model.image)
                     .resizable()
                     .frame(width: 50, height: 50)
                 Text(model.habit)

@@ -62,8 +62,8 @@ class RoutineViewModel : ObservableObject {
         }
         guard let lastDay = model.markedDays.last else { return false }
         
-        var todayComp =  Calendar.current.dateComponents([.year, .month, .day], from: Date())
-        var lastDayComp = Calendar.current.dateComponents([.year, .month, .day], from: lastDay)
+        let todayComp =  Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        let lastDayComp = Calendar.current.dateComponents([.year, .month, .day], from: lastDay)
         
         if(todayComp.day == lastDayComp.day){
             
@@ -103,7 +103,7 @@ class RoutineViewModel : ObservableObject {
                 reminder.calendar = self.eventStore.defaultCalendarForNewReminders()
                 
                 let today = Date()
-                var tomorrow = today.addingTimeInterval(86400)
+                let tomorrow = today.addingTimeInterval(86400)
                 
                 var comp = Calendar.current.dateComponents([.year, .month, .day], from: tomorrow)
                 comp.hour = 11
