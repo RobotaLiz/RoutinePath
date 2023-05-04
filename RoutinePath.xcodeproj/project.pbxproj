@@ -91,14 +91,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B384A1CA29EE9DBE007E8A1B = {
+		B37E47502A038F1E00F31453 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B32790D629EFDC0D00E623D2 /* RoutineModel.swift */,
+				B32790D829EFDF0A00E623D2 /* RoutineViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B37E47522A038F4700F31453 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				B37E47102A01063400F31453 /* popUp.swift */,
+				B3C2AD1629F7B6ED00477AA5 /* ListView.swift */,
 				B32790DC29F1488000E623D2 /* AddNewRoutineView.swift */,
 				B32790DA29EFE32A00E623D2 /* RoutineView.swift */,
-				B32790D829EFDF0A00E623D2 /* RoutineViewModel.swift */,
-				B32790D629EFDC0D00E623D2 /* RoutineModel.swift */,
+				B384A1D829EE9DBE007E8A1B /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B384A1CA29EE9DBE007E8A1B = {
+			isa = PBXGroup;
+			children = (
+				B37E47502A038F1E00F31453 /* Model */,
+				B37E47522A038F4700F31453 /* Views */,
 				B384A1D529EE9DBE007E8A1B /* RoutinePath */,
 				B384A1E629EE9DBF007E8A1B /* RoutinePathTests */,
 				B384A1F029EE9DBF007E8A1B /* RoutinePathUITests */,
@@ -121,8 +139,6 @@
 			children = (
 				B384A20729EEA39F007E8A1B /* GoogleService-Info.plist */,
 				B384A1D629EE9DBE007E8A1B /* RoutinePathApp.swift */,
-				B384A1D829EE9DBE007E8A1B /* ContentView.swift */,
-				B3C2AD1629F7B6ED00477AA5 /* ListView.swift */,
 				B384A1DA29EE9DBF007E8A1B /* Assets.xcassets */,
 				B384A1DC29EE9DBF007E8A1B /* Preview Content */,
 			);

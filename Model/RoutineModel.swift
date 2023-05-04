@@ -8,7 +8,7 @@ struct RoutineModel : Identifiable, Codable  {
     var markedDays: [Date]
     var habit : String
     var image : String
-   
+    
     init( habit: String,image: String, markedDays: [Date]) {
         self.habit = habit
         self.markedDays = markedDays
@@ -17,7 +17,7 @@ struct RoutineModel : Identifiable, Codable  {
     
     
 }
-    
+
 
 
 

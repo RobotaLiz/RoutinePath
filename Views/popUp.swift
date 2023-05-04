@@ -5,15 +5,15 @@ import SwiftUI
 extension View  {
     
     public func popup<PopupContent: View>(
-          isPresented: Binding<Bool>,
-          view: @escaping () -> PopupContent) -> some View {
-          self.modifier(
-              Popup(
-                  isPresented: isPresented,
-                  view: view)
-          )
-      }
-  }
+        isPresented: Binding<Bool>,
+        view: @escaping () -> PopupContent) -> some View {
+            self.modifier(
+                Popup(
+                    isPresented: isPresented,
+                    view: view)
+            )
+        }
+}
 public struct Popup<PopupContent>: ViewModifier where PopupContent: View {
     
     init(isPresented: Binding<Bool>,
@@ -82,28 +82,28 @@ public struct Popup<PopupContent>: ViewModifier where PopupContent: View {
         isPresented = false
     }
 }
-    extension View {
-        func frameGetter(_ frame: Binding<CGRect>) -> some View {
-            modifier(FrameGetter(frame: frame))
-        }
+extension View {
+    func frameGetter(_ frame: Binding<CGRect>) -> some View {
+        modifier(FrameGetter(frame: frame))
     }
-      
-    struct FrameGetter: ViewModifier {
-      
-        @Binding var frame: CGRect
-        
-        func body(content: Content) -> some View {
-            content
-                .background(
-                    GeometryReader { proxy -> AnyView in
-                        let rect = proxy.frame(in: .global)
-                        // This avoids an infinite layout loop
-                        if rect.integral != self.frame.integral {
-                            DispatchQueue.main.async {
-                                self.frame = rect
-                            }
+}
+
+struct FrameGetter: ViewModifier {
+    
+    @Binding var frame: CGRect
+    
+    func body(content: Content) -> some View {
+        content
+            .background(
+                GeometryReader { proxy -> AnyView in
+                    let rect = proxy.frame(in: .global)
+                    // This avoids an infinite layout loop
+                    if rect.integral != self.frame.integral {
+                        DispatchQueue.main.async {
+                            self.frame = rect
                         }
+                    }
                     return AnyView(EmptyView())
                 })
-        }
     }
+}

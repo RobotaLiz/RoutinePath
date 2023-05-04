@@ -62,8 +62,11 @@ class RoutineViewModel : ObservableObject {
         }
         guard let lastDay = model.markedDays.last else { return false }
         
-        let diff = Calendar.current.dateComponents([.day], from: lastDay, to: Date.now)
-        if(diff.day == 0){
+        var todayComp =  Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        var lastDayComp = Calendar.current.dateComponents([.year, .month, .day], from: lastDay)
+        
+        if(todayComp.day == lastDayComp.day){
+            
             return true
         }
         
