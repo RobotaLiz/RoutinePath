@@ -7,7 +7,11 @@ struct AddNewRoutineView : View {
     @State var habit = ""
     @State var motivation = ""
     @State var image = ""
-    var images = ["figure.run","figure.walk","figure.mind.and.body","figure.strengthtraining.traditional","figure.yoga"]
+   
+    var images = ["figure.run","figure.walk",
+                  "figure.mind.and.body",
+                  "figure.strengthtraining.traditional",
+                  "figure.yoga"]
     
     var body: some View {
         
